@@ -12,6 +12,7 @@ This is an example of a Concourse pipeline that performs the following tasks for
 
 1. deploys it to a Cloud Foundry production space
 
+![Delivery pipeline][pipeline01]
 
 Each step is configured to perform automatically only if the previous step has been successfully executed.
 
@@ -75,9 +76,11 @@ You will then notice the pipeline's jobs getting executed within a few seconds, 
 
 Notice that the pipeline is organized in two groups: _delivery_ and _deployment_, with corresponding links located at the top of the pipeline's diagram.
 
-The _delivery_ group contains the jobs associated with a typical build and test pipeline for development organizations and/or a staging environment.
+The _delivery_ group contains the jobs associated with a typical build and test pipeline for development organizations and/or a staging environment. See the pipeline image above.
 
 The _deployment_ group displays the job associated with the typical task of promoting a successful build from development/staging into production.
+
+![Deployment pipeline][pipeline02]
 
 Edit file _ci/pipeline.yml_ to inspect how this sample Concourse pipeline was defined and structured.
 
@@ -85,3 +88,6 @@ Edit file _ci/pipeline.yml_ to inspect how this sample Concourse pipeline was de
 ## Credits
 
 This project was forked from the original work of [J.Calabrese's sample concourse app](https://github.com/xchapter7x/concourse-demo-app).
+
+[pipeline01]: https://raw.githubusercontent.com/lsilvapvt/sample-app-pipeline/master/images/pipeline01.png "Delivery pipeline"
+[pipeline02]: https://raw.githubusercontent.com/lsilvapvt/sample-app-pipeline/master/images/pipeline02.png "Deployment pipeline"
