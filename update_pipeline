@@ -1,1 +1,0 @@
-./fly set-pipeline -c ci/pipeline.yml -p demo-app -l ci/credentials.yml
