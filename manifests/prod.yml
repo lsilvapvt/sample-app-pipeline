@@ -1,0 +1,3 @@
+---
+name: demo-app-prod 
+buildpack: https://github.com/cloudfoundry/go-buildpack.git

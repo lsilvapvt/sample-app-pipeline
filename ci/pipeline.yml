@@ -1,0 +1,96 @@
+groups:
+- name: delivery
+  jobs:
+  - unit-tests
+  - compile-smoke
+  - deploy-non-prod
+  - load-test
+- name: deployment
+  jobs:
+  - deploy-prod
+
+resources:
+- name: concourse-demo-app-master
+  type: git
+  source:
+    branch: master
+    private_key: {{github-private-key}}
+    uri: git@github.com:lsilvapvt/concourse-sample-app-pipeline.git
+- name: non-prod
+  type: cf
+  source:
+    api: {{pws-api}}
+    organization: {{pws-organization}}
+    username: {{deploy-username}}
+    password: {{deploy-password}}
+    skip_cert_check: false
+    space: {{pws-staging-space}}
+- name: production
+  type: cf
+  source:
+    api: {{pws-api}}
+    organization: {{pws-organization}}
+    username: {{deploy-username}}
+    password: {{deploy-password}}
+    skip_cert_check: false
+    space: {{pws-production-space}}
+
+jobs:
+- name: unit-tests
+  serial: true
+  public: true
+  plan:
+  - get: concourse-demo-app-master
+    trigger: true
+  - task: unit-tests
+    file: concourse-demo-app-master/ci/unit.yml
+- name: compile-smoke
+  serial: true
+  public: true
+  plan:
+  - get: concourse-demo-app-master
+    trigger: true
+    passed:
+      - unit-tests
+  - task: compile-smoke
+    file: concourse-demo-app-master/ci/compile.yml
+- name: deploy-non-prod
+  serial: true
+  plan:
+  - get: concourse-demo-app-master
+    trigger: true
+    passed:
+      - compile-smoke
+  - put: non-prod
+    params:
+      manifest: concourse-demo-app-master/manifests/staging.yml
+      path: concourse-demo-app-master
+      current_app_name: demo-app-stage
+- name: load-test
+  public: true
+  plan:
+  - get: concourse-demo-app-master
+    trigger: true
+    passed:
+      - deploy-non-prod
+  - task: load-test
+    file: concourse-demo-app-master/ci/load.yml
+    config:
+      params:
+        "CFUSER": {{deploy-username}}
+        "CFPASS": {{deploy-password}}
+        "ORG": {{pws-organization}}
+        "SPACE": {{pws-staging-space}}
+        "API": {{pws-api}}
+        "APPNAME": demo-app-stage
+- name: deploy-prod
+  plan:
+  - get: concourse-demo-app-master
+    trigger: true
+    passed:
+      - load-test
+  - put: production
+    params:
+      manifest: concourse-demo-app-master/manifests/prod.yml
+      path: concourse-demo-app-master
+      current_app_name: demo-app-prod

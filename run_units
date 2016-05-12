@@ -1,0 +1,1 @@
+./fly execute -c ci/unit.yml -p --input concourse-demo-app-master=.

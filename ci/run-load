@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+export GOPATH=$PWD/go
+export PATH=$GOPATH/bin:$PATH
+
+curl -L "https://cli.run.pivotal.io/stable?release=linux64-binary&source=github" | tar -zx
+wget https://github.com/xchapter7x/cf-app-attack/releases/download/v1.1.3/cf-app-attack.tgz
+tar -xvzf cf-app-attack.tgz
+yes | ./cf install-plugin pipeline/output/builds/linux64/cf-app-attack
+
+./cf login -o $ORG -s $SPACE -u $CFUSER -p $CFPASS -a $API > /dev/null 2>&1
+echo "GET https://{{.AppHost}}" | ./cf bench $APPNAME attack -duration=5s -insecure | ./cf bench $APPNAME report -reporter="text"
