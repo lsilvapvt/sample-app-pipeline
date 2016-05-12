@@ -14,8 +14,8 @@ resources:
   type: git
   source:
     branch: master
-    private_key: {{github-private-key}}
-    uri: git@github.com:lsilvapvt/concourse-sample-app-pipeline.git
+    # private_key: {{github-private-key}}
+    uri: https://github.com/lsilvapvt/sample-app-pipeline.git
 - name: non-prod
   type: cf
   source:
