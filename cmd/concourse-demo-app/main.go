@@ -17,7 +17,7 @@ func main() {
 }
 
 const (
-	WelcomeMessage = "Welcome to the new home page!"
+	WelcomeMessage = "Welcome to my awesome page!"
 )
 
 func IndexController(w http.ResponseWriter, req *http.Request) {
