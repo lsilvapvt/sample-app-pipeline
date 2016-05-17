@@ -1,0 +1,10 @@
+---
+platform: linux
+
+image: docker:///golang#1.4.2-wheezy
+
+inputs:
+  - name: Pipeline-Scripts
+
+run:
+  path: Pipeline-Scripts/ci/tasks/dummy-task.sh

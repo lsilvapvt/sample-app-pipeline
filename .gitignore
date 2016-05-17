@@ -4,3 +4,4 @@ id_rsa
 id_rsa.pub
 fly
 !cmd/concourse-demo-app
+pipeline-uc*.yml
