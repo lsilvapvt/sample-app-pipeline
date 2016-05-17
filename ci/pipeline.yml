@@ -85,7 +85,7 @@ jobs:
 - name: deploy-prod
   plan:
   - get: concourse-demo-app-master
-    trigger: true
+    trigger: false
     passed:
       - load-test
   - put: production
