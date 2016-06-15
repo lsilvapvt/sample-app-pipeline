@@ -38,7 +38,7 @@ The requirements for this pipeline's setup are as follows:
 How to setup this sample pipeline on your Concourse server:
 
 1. Clone this git repository on your local machine  
-  __git clone https://github.com/lsilvapvt/sample-app-pipeline.git __  
+  __git clone https://github.com/lsilvapvt/sample-app-pipeline.git__  
   __cd sample-app-pipeline__
 
 1. Setup the pipeline credentials file  
@@ -56,7 +56,7 @@ How to setup this sample pipeline on your Concourse server:
    __fly -t local login <concourse-url>__  
 
    Example:  
-   __fly -t local login http://192.168.100.4:8080  __  
+   __fly -t local login http://192.168.100.4:8080__  
    __fly -t local set-pipeline -c ci/pipeline.yml -p sample-app-pipeline -l ci/credentials.yml__  
 
 1. Access to the Concourse web interface (e.g. http://192.168.100.4:8080 ), click on the list of pipelines, un-pause the _sample-app-pipeline_ and then click on its link to visualize its pipeline diagram.
