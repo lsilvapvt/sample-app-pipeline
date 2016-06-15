@@ -1,3 +1,5 @@
+![Multi-space pipeline](https://raw.githubusercontent.com/lsilvapvt/concourse-pipeline-samples/master/common/images/multi-spaces-pipeline.jpg)
+
 # Application CI pipeline targeting multiple CF spaces
 
 This is an example of a Concourse pipeline that performs the following tasks for a sample _Golang_ application:
