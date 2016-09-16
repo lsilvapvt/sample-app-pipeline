@@ -1,4 +1,4 @@
-![Multi-space pipeline](https://raw.githubusercontent.com/lsilvapvt/concourse-pipeline-samples/master/common/images/multi-spaces-pipeline.jpg)
+![Multi-space pipeline](https://raw.githubusercontent.com/pivotalservices/concourse-pipeline-samples/master/common/images/multi-spaces-pipeline.jpg)
 
 # Application CI pipeline targeting multiple CF spaces
 
